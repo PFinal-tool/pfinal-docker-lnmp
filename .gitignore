@@ -4,3 +4,5 @@
 .idea/
 .svn
 elasticsearch/data/nodes/
+log/*
+log/elasticsearch/

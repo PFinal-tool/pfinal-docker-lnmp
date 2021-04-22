@@ -95,6 +95,6 @@ RUN docker-php-ext-configure gd --with-jpeg=/usr/include --with-freetype=/usr/in
     #&& docker-php-ext-install ldap \
 # Swoole
 RUN pecl install Swoole  && docker-php-ext-enable swoole
-
+RUN pecl install redis  && docker-php-ext-enable redis
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
