@@ -116,7 +116,7 @@ services:
     user: ${ES_UID}
     command: ["sh", "-c", "./bin/elasticsearch"]    
     environment:
-        - "ES_JAVA_OPTS=-Xms64m -Xmx128m"
+        - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
         - "discovery.type=single-node"
         - "COMPOSE_PROJECT_NAME=elasticsearch-server"
     
