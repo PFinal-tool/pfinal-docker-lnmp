@@ -3,6 +3,6 @@
 .env
 .idea/
 .svn
-elasticsearch/data/nodes/
+elasticsearch/data/*
 log/*
 log/elasticsearch/
