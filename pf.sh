@@ -11,15 +11,15 @@ fi
 LNMP_Ver='1.0'
 
 cur_dir=$(pwd)
-action=$1
 
+action=$1
 
 Display_Addons_Menu()
 {
-    echo "##### cache / optimizer / accelerator #####"
+    echo "##### Menu #####"
     echo "1: Start-LNMP"
     echo "2: Restart-LNMP"
-    echo "3: Memcached"
+    echo "3: Stop-LNMP"
     echo "4: opcache"
     echo "5: Redis"
     echo "6: apcu"
@@ -27,9 +27,17 @@ Display_Addons_Menu()
     echo "8: Unstall"
     echo "exit: Exit current script"
     echo "#####################################################"
-    read -p "Enter your choice (1, 2, 3, 4, 5, 6, 7, 8 or exit): " action2
+    read -p "Enter your choice (1, 2, 3, 4, 5, 6, 7, 8 or exit): " action
 }
 
+Check_Docker()
+{
+   # 检测是否安装Docker
+   if ! type docker >/dev/null 2>&1; then
+        echo 'docker 未安装';
+        exit
+   fi
+}
 
 
 clear
@@ -41,7 +49,25 @@ echo "+------------------------------------------------------------------------+
 echo "|           For more information please visit                            |"
 echo "+------------------------------------------------------------------------+"
 
-if [[ "${action}" == "" || "${action2}" == "" ]]; then
+if ["${action}" == ""]; then
     action='install'
     Display_Addons_Menu
 fi
+case "${action}" in
+            1)
+                Check_Docker
+                echo "Start LNMP For Docker:"
+                ES_UID=$(id -u):$(id -g) docker-compose start
+                ;;
+            2)
+                Check_Docker
+                echo "ReStart LNMP For Docker:"
+                ES_UID=$(id -u):$(id -g) docker-compose restart
+                ;;
+            3)
+                Check_Docker
+                echo "Stop LNMP For Docker:"
+                ES_UID=$(id -u):$(id -g) docker-compose stop
+                ;;
+esac
+
