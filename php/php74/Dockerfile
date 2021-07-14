@@ -1,4 +1,4 @@
-FROM php:8.0-fpm-buster
+FROM php:7.4-fpm
 
 #COPY ./sources.list.stretch /etc/apt/sources.list
 
@@ -96,6 +96,5 @@ RUN docker-php-ext-configure gd --with-jpeg=/usr/include --with-freetype=/usr/in
 # Swoole
 RUN pecl install Swoole  && docker-php-ext-enable swoole
 RUN pecl install redis  && docker-php-ext-enable redis
-RUN pecl install Protobuf  && docker-php-ext-enable protobuf
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
