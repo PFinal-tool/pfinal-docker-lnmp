@@ -60,6 +60,7 @@ services:
     build: ./php/php80/
     expose:
       - "9000"
+      - "9999"
     volumes:
       - ${WORKSPACES}:/var/www/html/:rw,cached
       - ./conf/php/php80.ini:/usr/local/etc/php/php.ini:ro,cached
