@@ -85,16 +85,16 @@ RUN docker-php-ext-configure gd --with-jpeg=/usr/include --with-freetype=/usr/in
     #&& apt-get install -y postgresql-client \
     #&& apt-get install -y mysql-client \
     #&& :\
-    #&& apt-get install -y libc-client-dev \
+    #&& apt-get install -y libc-client-dev \s
     #&& docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     #&& docker-php-ext-install imap \
     #&& :\
     #&& apt-get install -y libldb-dev \
     #&& apt-get install -y libldap2-dev \
-    #&& docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
+    #&& docker-php-ext-configure ldap --with-libdsir=lib/x86_64-linux-gnu \
     #&& docker-php-ext-install ldap \
 # Swoole
-RUN pecl install Swoole  -y && docker-php-ext-enable swoole
+# RUN pecl install Swoole  -y && docker-php-ext-enable swoole
 RUN pecl install redis  && docker-php-ext-enable redis
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
