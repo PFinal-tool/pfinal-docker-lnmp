@@ -96,15 +96,36 @@ services:
         ipv4_address: ${PHP80_IP}      
   mysql:
     #image: mysql:5.6
-    image: mysql:5.7
+    # image: mysql:5.7
+    image: mysql:8.0.23
     ports:
       - "3306:3306"
     volumes:
       - ./conf/mysql/my.cnf:/etc/mysql/my.cnf:ro,cached
       - ./mysql/:/var/lib/mysql/:rw,cached
-      - ./log/mysql/:/var/log/mysql/:rw,cached
+      - ./log/mysql/:/logs:rw,cached
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_INITDB_SKIP_TZINFO: "Asia/Shanghai"
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "1"
+    command:
+    #   - /bin/bash
+    #   - -c
+    #   - |
+    #     mkdir -p /var/lib/mysql-files
+    #     chmod +rw /var/lib/mysql
+    #     mysqld 
+        --default-authentication-plugin=mysql_native_password 
+        --character-set-server=utf8mb4 
+        --collation-server=utf8mb4_general_ci 
+        --explicit_defaults_for_timestamp=true 
+        --lower_case_table_names=1
     networks:
       docker_net:
         ipv4_address: ${MYSQL_IP}
