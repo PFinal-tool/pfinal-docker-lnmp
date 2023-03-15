@@ -3,6 +3,8 @@
 .env
 .idea/
 .svn
-elasticsearch/data/*
+elasticsearch/*
 log/*
 log/elasticsearch/
+mysql/*
+mysql8/*
