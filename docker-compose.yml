@@ -110,7 +110,7 @@ services:
       - mysql:mysql
       - redis:redis
       - memcached:memcached
-      # - elasticsearch:elasticsearch
+      - elasticsearch:elasticsearch
     tty: true
     networks:
       docker_net:
