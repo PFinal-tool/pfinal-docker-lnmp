@@ -25,6 +25,7 @@ socket          = /var/run/mysqld/mysqld.sock
 datadir         = /var/lib/mysql
 secure-file-priv= NULL
 default_authentication_plugin=mysql_native_password
-
+host_cache_size=0
+skip-name-resolve
 # Custom config should go here
 !includedir /etc/mysql/conf.d/

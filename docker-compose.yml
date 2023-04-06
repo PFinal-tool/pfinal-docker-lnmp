@@ -155,7 +155,7 @@ services:
         ipv4_address: ${MEMCACHED_IP}
   
   elasticsearch:
-    image: elasticsearch:8.1.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -165,19 +165,25 @@ services:
         - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins
         - ./log/elasticsearch/:/usr/share/elasticsearch/logs
     #user: ${ES_UID}
-    command: ["sh", "-c", "./bin/elasticsearch"]    
+    # command: ["sh", "-c","groupadd elsearch","useradd elsearch -g elsearch -p elasticsearch","chown -R elsearch:elsearch elasticsearch-7.8.0","su elsearch", "./bin/elasticsearch -d"]    
     environment:
-        - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
-        - "discovery.type=single-node"
-        - "bootstrap.memory_lock=true"
-        - "COMPOSE_PROJECT_NAME=elasticsearch-server"
-    
+        - node.name=es-node
+        - cluster.name=es-cluster
+        - discovery.seed_hosts=elasticsearch
+        - bootstrap.memory_lock=true
+        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      # 取消内存相关限制 用于开启内存锁定
+      memlock:
+        soft: -1
+        hard: -1
+    user: "1000:1000"
     networks:
         docker_net:
           ipv4_address: ${ES_IP}
 
   kibana:
-    image: kibana:8.1.2
+    image: kibana:7.8.0
     ports:
       - "5601:5601"     
     volumes:
