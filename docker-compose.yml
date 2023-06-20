@@ -16,7 +16,7 @@ services:
     links:
       - php72:fpm72
       - php74:fpm74
-      # - php56:fpm56
+      - php56:fpm56
       - php80:fpm80
       - php82:fpm82
     environment:
@@ -62,21 +62,21 @@ services:
       docker_net:
         ipv4_address: ${PHP74_IP}      
 
-  # php56:
-  #   build: ./php/php56/
-  #   expose:
-  #     - "9000"
-  #   volumes:
-  #     - ${WORKSPACES}:/var/www/html/:rw,cached
-  #     - ./conf/php/php56.ini:/usr/local/etc/php/php.ini:ro,cached
-  #     - ./conf/php/php-fpm.d/www56.conf:/usr/local/etc/php-fpm.d/www.conf:rw,cached
-  #     - ./log/php-fpm/:/var/log/php-fpm/:rw,cached
-  #   links:
-  #     - mysql:mysql
-  #     - redis:redis
-  #   networks:
-  #     docker_net:
-  #       ipv4_address: ${PHP56_IP}
+  php56:
+    build: ./php/php56/
+    expose:
+      - "9000"
+    volumes:
+      - ${WORKSPACES}:/var/www/html/:rw,cached
+      - ./conf/php/php56.ini:/usr/local/etc/php/php.ini:ro,cached
+      - ./conf/php/php-fpm.d/www56.conf:/usr/local/etc/php-fpm.d/www.conf:rw,cached
+      - ./log/php-fpm/:/var/log/php-fpm/:rw,cached
+    links:
+      - mysql:mysql
+      - redis:redis
+    networks:
+      docker_net:
+        ipv4_address: ${PHP56_IP}
   php80:
     build: ./php/php80/
     expose:

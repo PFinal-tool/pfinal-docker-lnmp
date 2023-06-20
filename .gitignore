@@ -7,4 +7,4 @@ elasticsearch/*
 log/*
 log/elasticsearch/
 mysql/*
-mysql8/*
+mysql8

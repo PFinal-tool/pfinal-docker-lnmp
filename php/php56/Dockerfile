@@ -1,7 +1,7 @@
 FROM php:5.6-fpm
 
 
-#COPY ./sources.list.jessie /etc/apt/sources.list
+# COPY ./sources.list.jessie /etc/apt/sources.list
 
 # Extensions: ctype, dom, fileinfo, ftp, hash, iconv, json, pdo, pdo_sqlite, session,
 # tokenizer, simplexml, xml, xmlreader, xmlwriter and phar are bundled and compiled into
@@ -13,7 +13,12 @@ FROM php:5.6-fpm
 # 3. soap requires libxml2-dev.
 # 4. xml, xmlrpc, wddx require libxml2-dev and libxslt-dev.
 # 5. Line `&& :\` is just for better reading and do nothing.
+# COPY ./sources.list /etc/apt/sources.list
+RUN sed -i -e 's/deb.debian.org/archive.debian.org/g' \
+           -e 's|security.debian.org|archive.debian.org/|g' \
+           -e '/stretch-updates/d' /etc/apt/sources.list
 RUN apt-get update
+
 RUN ln -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/
 RUN apt-get install -y gcc make openssl libssl-dev curl libbz2-dev libxml2-dev libjpeg-dev libpng-dev libfreetype6-dev libzip-dev 
 RUN apt-get install -y freetds-bin firebird-dev freetds-dev freetds-common
