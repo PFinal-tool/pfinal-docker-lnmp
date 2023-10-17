@@ -117,14 +117,16 @@ services:
         ipv4_address: ${PHP82_IP}   
   mysql:
     #image: mysql:5.6
-    # image: mysql:5.7
-    image: mysql:8
+    image: mysql:5.7
+    # image: mysql:8
     ports:
       - "3306:3306"
     volumes:
-      - ./conf/mysql/my8.cnf:/etc/mysql/my.cnf:ro,cached
-      - ./mysql8/:/var/lib/mysql/:rw,cached
-      - ./log/mysql8/:/logs:rw,cached
+      #- ./conf/mysql/my8.cnf:/etc/mysql/my.cnf:ro,cached
+      - ./conf/mysql/my.cnf:/etc/mysql/my.cnf:ro,cached
+      #- ./mysql8/:/var/lib/mysql/:rw,cached
+      - ./mysql7/:/var/lib/mysql/:rw,cached
+      - ./log/mysql7/:/logs:rw,cached
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
