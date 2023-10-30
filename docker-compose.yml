@@ -196,16 +196,16 @@ services:
       docker_net:
         ipv4_address: ${KA_IP}
 
-  portainer:
-    image: portainer/portainer:latest
-    ports:
-      - "9091:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:cached
-      - ./portainer/:/data:cached
-    networks:
-      docker_net:
-        ipv4_address: ${PORTAINER_IP}
+  # portainer:
+  #   image: portainer/portainer:latest
+  #   ports:
+  #     - "9091:9000"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:cached
+  #     - ./portainer/:/data:cached
+  #   networks:
+  #     docker_net:
+  #       ipv4_address: ${PORTAINER_IP}
 
 networks:
   docker_net:

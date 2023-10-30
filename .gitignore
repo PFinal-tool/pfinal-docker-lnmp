@@ -8,3 +8,5 @@ log/*
 log/elasticsearch/
 mysql/*
 mysql8
+conf/nginx/conf.d/crm.conf
+mysql7/*
