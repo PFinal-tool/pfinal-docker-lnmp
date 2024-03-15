@@ -85,6 +85,9 @@ myisam_recover_options
 # localhost which is more compatible and is not less secure.
 #bind-address	= 127.0.0.1
 
+# 启用分区功能
+innodb_file_per_table=1
+
 [mysqldump]
 quick
 max_allowed_packet = 16M
