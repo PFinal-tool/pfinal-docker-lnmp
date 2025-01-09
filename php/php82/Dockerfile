@@ -1,5 +1,5 @@
 FROM php:8.2.4RC1-fpm
-
+# FROM php:8.4.1-fpm
 # RUN    sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list 
 
 #COPY ./sources.list.stretch /etc/apt/sources.list
@@ -97,9 +97,17 @@ RUN docker-php-ext-configure gd --with-jpeg=/usr/include --with-freetype=/usr/in
     # && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
     # && docker-php-ext-install ldap 
 # Swoole
-RUN apt-get update
-RUN pecl install Swoole -y  && docker-php-ext-enable swoole
-RUN pecl install redis  && docker-php-ext-enable redis
-RUN pecl install Protobuf  && docker-php-ext-enable protobuf
-# Composer
+RUN apt-get update \
+    && apt-get install -y \
+        pkg-config \
+        libzstd-dev \
+        libssl-dev \
+        gcc \
+        make \
+        autoconf \
+    && pecl install redis \
+    && pecl install protobuf \
+    && pecl install swoole \
+    && docker-php-ext-enable redis protobuf swoole
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \

@@ -97,9 +97,19 @@ RUN docker-php-ext-configure gd --with-jpeg=/usr/include --with-freetype=/usr/in
     # && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
     # && docker-php-ext-install ldap 
 # Swoole
-RUN apt-get update
-RUN pecl install Swoole -y  && docker-php-ext-enable swoole
-RUN pecl install redis  && docker-php-ext-enable redis
-RUN pecl install Protobuf  && docker-php-ext-enable protobuf
+# RUN pecl install Swoole -y  && docker-php-ext-enable swoole
+RUN apt-get update \
+    && apt-get install -y \
+        pkg-config \
+        libzstd-dev \
+        libssl-dev \
+        gcc \
+        make \
+        autoconf \
+    && pecl install redis \
+    && pecl install protobuf-3.21.12 \
+    && pecl install swoole-4.8.13 \
+    && docker-php-ext-enable redis protobuf swoole
+
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
