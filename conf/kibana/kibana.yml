@@ -4,8 +4,9 @@ server.host: "0.0.0.0"
 #
 # 这边设置自己es的地址，
 elasticsearch.hosts: [ "http://172.100.0.10:9200" ]
-# elasticsearch.username: 'kibana'
-# elasticsearch.password: 'pfinal'
+# 移除认证配置，因为已经关闭安全认证
+# elasticsearch.username: 'elastic'
+# elasticsearch.password: 'VhV*B3VfDQPzYhQ'
 # # 显示登陆页面
 xpack.monitoring.ui.container.elasticsearch.enabled: true
 # 开启中文模式
